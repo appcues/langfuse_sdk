@@ -2,7 +2,7 @@ defmodule LangfuseSdk.MixProject do
   use Mix.Project
 
   @version "0.0.1"
-  @url "https://github.com/workera-ai/langfuse_sdk"
+  @url "https://github.com/appcues/langfuse_sdk"
 
   def project do
     [
@@ -58,7 +58,7 @@ defmodule LangfuseSdk.MixProject do
     [
       {:oapi_generator, "~> 0.2.0", only: :dev, runtime: false},
       {:req, "~> 0.4 or ~> 0.5"},
-      {:elixir_uuid, "~> 1.2"},
+      {:uuid, "~> 1.1"},
       {:faker, "~> 0.18.0", only: :test},
       {:inflex, "~> 2.1"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
