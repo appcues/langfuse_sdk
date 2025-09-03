@@ -14,6 +14,19 @@ defmodule LangfuseSdk.Generated.CreateDatasetRunItemRequest do
 
   defstruct [:dataset_item_id, :metadata, :observation_id, :run_description, :run_name, :trace_id]
 
+  defimpl Jason.Encoder do
+    def encode(value, opts) do
+      value
+      |> Map.from_struct()
+      |> Enum.map(fn {key, val} ->
+        camel_key = Inflex.camelize(key, :lower)
+        {camel_key, val}
+      end)
+      |> Map.new()
+      |> Jason.Encode.map(opts)
+    end
+  end
+
   @doc false
   @spec __fields__(atom) :: keyword
   def __fields__(type \\ :t)
