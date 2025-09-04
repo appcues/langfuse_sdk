@@ -1,6 +1,7 @@
 defmodule LangfuseSdk.Ingestor do
   @moduledoc false
   alias LangfuseSdk.Generated.Ingestion
+  alias LangfuseSdk.Generated.IngestionResponse
   alias LangfuseSdk.Tracing.Event
   alias LangfuseSdk.Tracing.Generation
   alias LangfuseSdk.Tracing.Score
@@ -9,19 +10,20 @@ defmodule LangfuseSdk.Ingestor do
 
   require Logger
 
+  @spec ingest_payload(list() | map(), map() | nil) ::
+          {:ok, String.t()} | {:ok, [String.t()]} | {:error, any()}
   def ingest_payload(items, metadata \\ nil) do
     payload = %{"metadata" => metadata, "batch" => List.wrap(items)}
 
     case Ingestion.ingestion_batch(payload) do
-      {:ok, %{"errors" => [], "successes" => [success]}} ->
-        {:ok, Map.fetch!(success, "id")}
+      {:ok, %IngestionResponse{errors: [], successes: [success]}} ->
+        {:ok, success.id}
 
-      {:ok, %{"errors" => [], "successes" => success}} ->
-        {:ok, Enum.map(success, &Map.fetch!(&1, "id"))}
+      {:ok, %IngestionResponse{errors: [], successes: successes}} ->
+        {:ok, Enum.map(successes, & &1.id)}
 
-      {:ok, %{"errors" => errors, "successes" => []}} ->
-        error = get_in(errors, [Access.at!(0), "error"])
-        {:error, Jason.decode!(error)}
+      {:ok, %IngestionResponse{errors: [error | _], successes: _successes}} ->
+        {:error, error.error || %{message: error.message}}
 
       {:error, reason} ->
         {:error, reason}

@@ -25,6 +25,13 @@ defmodule LangfuseSdk do
       score = LangfuseSdk.Tracing.Score.new(%{...})
       {:ok, ^id} = LangfuseSdk.create(score)
   """
+  @spec create(
+          %LangfuseSdk.Tracing.Trace{}
+          | %LangfuseSdk.Tracing.Event{}
+          | %LangfuseSdk.Tracing.Span{}
+          | %LangfuseSdk.Tracing.Generation{}
+          | %LangfuseSdk.Tracing.Score{}
+        ) :: {:ok, String.t()} | {:error, any()}
   def create(item)
 
   def create(%LangfuseSdk.Tracing.Trace{} = trace) do
@@ -59,6 +66,13 @@ defmodule LangfuseSdk do
   Accepts a list of items that will be converted Langfuse API create events in a single batch.
   Batch sizes are limited to 3.5 MB in total. You need to adjust the number of items per batch accordingly.
   """
+  @spec create_many([
+          %LangfuseSdk.Tracing.Trace{}
+          | %LangfuseSdk.Tracing.Event{}
+          | %LangfuseSdk.Tracing.Span{}
+          | %LangfuseSdk.Tracing.Generation{}
+          | %LangfuseSdk.Tracing.Score{}
+        ]) :: {:ok, [String.t()]} | {:error, any()}
   def create_many(items) do
     items
     |> Enum.map(&LangfuseSdk.Ingestor.to_event(&1, :create))
