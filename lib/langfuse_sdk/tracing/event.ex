@@ -19,7 +19,8 @@ defmodule LangfuseSdk.Tracing.Event do
     :version,
     :timestamp,
     :trace_id,
-    :parent_observation_id
+    :parent_observation_id,
+    :environment
   ]
 
   def new(opts \\ []) do

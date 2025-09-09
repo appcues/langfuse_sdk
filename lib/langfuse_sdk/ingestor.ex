@@ -48,7 +48,8 @@ defmodule LangfuseSdk.Ingestor do
         "version" => trace.version,
         "metadata" => trace.metadata,
         "tags" => trace.tags,
-        "public" => trace.public
+        "public" => trace.public,
+        "environment" => trace.environment
       }
     }
   end
@@ -70,7 +71,8 @@ defmodule LangfuseSdk.Ingestor do
         "statusMessage" => event.status_message,
         "parentObservationId" => event.parent_observation_id,
         "version" => event.version,
-        "id" => event.id
+        "id" => event.id,
+        "environment" => event.environment
       }
     }
   end
@@ -93,7 +95,8 @@ defmodule LangfuseSdk.Ingestor do
         "parentObservationId" => span.parent_observation_id,
         "version" => span.version,
         "id" => span.id,
-        "endTime" => span.end_time
+        "endTime" => span.end_time,
+        "environment" => span.environment
       }
     }
   end
@@ -120,7 +123,8 @@ defmodule LangfuseSdk.Ingestor do
         "completionStartTime" => generation.completion_start_time,
         "model" => generation.model,
         "modelParameters" => generation.model_parameters,
-        "usage" => generation.usage
+        "usage" => generation.usage,
+        "environment" => generation.environment
       }
     }
   end
