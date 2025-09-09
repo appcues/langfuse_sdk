@@ -19,7 +19,8 @@ defmodule LangfuseSdk.Tracing.Trace do
     :tags,
     :public,
     :session_id,
-    :parent_observation_id
+    :parent_observation_id,
+    :environment
   ]
 
   def new(opts \\ []) do
@@ -42,7 +43,8 @@ defmodule LangfuseSdk.Tracing.Trace do
       :tags,
       {:toTimestamp, :to_timestamp},
       {:userId, :user_id},
-      :version
+      :version,
+      :environment
     ])
   end
 end
