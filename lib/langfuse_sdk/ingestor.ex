@@ -79,7 +79,7 @@ defmodule LangfuseSdk.Ingestor do
 
   def to_event(%Span{} = span, operation) do
     %{
-      "type" => event_type(Span, operation),
+      "type" => event_type(span, operation),
       "id" => span.id,
       "timestamp" => span.timestamp,
       "metadata" => span.metadata,
@@ -146,6 +146,10 @@ defmodule LangfuseSdk.Ingestor do
         "configId" => score.config_id
       }
     }
+  end
+
+  defp event_type(%Span{type: type}, operation) do
+    "#{type}-#{operation}"
   end
 
   defp event_type(module, operation) do

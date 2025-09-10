@@ -21,7 +21,8 @@ defmodule LangfuseSdk.Tracing.Span do
     :timestamp,
     :trace_id,
     :parent_observation_id,
-    :environment
+    :environment,
+    :type
   ]
 
   def new(opts \\ []) do
@@ -29,5 +30,6 @@ defmodule LangfuseSdk.Tracing.Span do
     |> struct!(opts)
     |> Value.force_new(:id, UUID.uuid4())
     |> Value.force_new(:timestamp, DateTime.utc_now())
+    |> Value.force_new(:type, :span)
   end
 end

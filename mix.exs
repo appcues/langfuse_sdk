@@ -1,7 +1,7 @@
 defmodule LangfuseSdk.MixProject do
   use Mix.Project
 
-  @version "0.0.4"
+  @version "0.0.5"
   @url "https://github.com/appcues/langfuse_sdk"
 
   def project do
