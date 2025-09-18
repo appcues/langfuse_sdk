@@ -17,7 +17,8 @@ defmodule LangfuseSdk.Tracing.Score do
     :trace_id,
     :observation_id,
     :data_type,
-    :config_id
+    :config_id,
+    :environment
   ]
 
   def new(opts \\ []) do

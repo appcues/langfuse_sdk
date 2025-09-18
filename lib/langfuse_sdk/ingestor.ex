@@ -143,7 +143,8 @@ defmodule LangfuseSdk.Ingestor do
         "observationId" => score.observation_id,
         "comment" => score.comment,
         "dataType" => score.data_type,
-        "configId" => score.config_id
+        "configId" => score.config_id,
+        "environment" => score.environment
       }
     }
   end
