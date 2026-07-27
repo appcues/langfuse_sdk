@@ -124,6 +124,8 @@ defmodule LangfuseSdk.Ingestor do
         "model" => generation.model,
         "modelParameters" => generation.model_parameters,
         "usage" => generation.usage,
+        "usageDetails" => generation.usage_details,
+        "costDetails" => generation.cost_details,
         "environment" => generation.environment
       }
     }
